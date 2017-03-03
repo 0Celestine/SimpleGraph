@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Grapher</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/control_menu.css">
+    <link rel="stylesheet" type="text/css" href="css/select.css">
+</head>
+
+<body>
+
+    <div class="controls">
+        <a href="#hide1" class="hide" id="hide1">+</a>
+        <a href="#show1" class="show" id="show1">-</a>
+        <div class="control_panel">
+            <form action="">
+                <p>
+                    <label class="label">Graph Type:</label>
+                    <select class="turnintodropdown">
+						<option>Select a graph type:</option>
+                        <option value="scatter">Scatter</option>
+                        <option value="network">Network</option>
+                        <option value="line">Line</option>
+                        <option value="bar">Bar</option>
+					</select>
+                </p>
+                <p>
+                    <label class="label">Axes:</label>
+                    <select class="turnintodropdown" name="axis">
+                        <option>Select x-axis data:</option>
+                    </select>
+                </p>
+                <p>
+                    <select class="turnintodropdown" name="axis">
+                        <option>Select y-axis data:</option>
+                    </select>
+                </p>
+                <p>
+                    <select class="turnintodropdown" name="axis">
+                        <option>Select z-axis data:</option>
+                    </select>
+                </p>
+                <a class="graph_btn" onclick="drawGraph()">GRAPH!</a>
+            </form>
+
+
+        </div>
+    </div>
+
+
+    <!-- JSON -->
+    <script type="text/javascript" src="resources/data.json"></script>
+    <!-- jQuery libraries -->
+    <script type="text/javascript" src="js/libs/jquery-3.1.1.js"></script>
+    <script type="text/javascript" src="js/libs/jquery-validate.js"></script>
+    <!-- three.js and TrackballControls libraries-->
+    <script type="text/javascript" src="js/libs/three.js"></script>
+    <script type="text/javascript" src="js/libs/TrackballControls.js"></script>
+    <!-- Main js scripts -->
+    <script type="text/javascript" src="js/parse.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/graph.js"></script>s
+    <script type="text/javascript" src="js/select.js"></script>
+    <script type="text/javascript" src="js/controls.js"></script>
+
+
+    <script type="text/javascript">
+
+        //scatterPlot("Actor", ["age", "total_gross", "movies"]);
+        //extractQuantAttributes();
+
+        /**
+         * Populates the axis select options.
+         */
+        function fillAxes() {
+            var quant_attr = extractQuantAttributes();
+            for (var obj in quant_attr) {
+                for (var attribute in quant_attr[obj]) {
+                    var select_text = obj.concat(" ", quant_attr[obj][attribute]);
+                    //console.log(typeof select_text, select_text);
+                    var new_select = "<option></option>";
+                    $(new_select).attr("value", select_text).text(select_text).appendTo("[name=axis]");
+                    console.log("filed added");
+                }
+            }
+        }
+        fillAxes();
+        tamingselect();
+
+    </script>
+
+
+</body>
+
+</html>

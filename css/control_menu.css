@@ -1,0 +1,91 @@
+.controls {
+    /*border: 2px solid black;*/
+    top: 5px;
+    left: 5px;
+    height:30px;
+    position: absolute;
+
+}
+.control_panel {
+    display:none;
+    height:auto;
+    margin:0;
+    float: left;
+    /*overflow-y: scroll;*/
+}
+.show {
+    display: none;
+}
+.hide:target + .show {
+    display: inline;
+}
+.hide:target {
+    display: none;
+}
+.hide:target ~ .control_panel{
+    display:inline;
+}
+
+.hide, .show {
+	width: 30px;
+	height: 30px;
+	border-radius: 30px;
+	font-size: 20px;
+	color: #fff;
+	text-shadow: 0 1px 0 #666;
+	text-align: center;
+    line-height: 30px;
+	text-decoration: none;
+	box-shadow: 1px 1px 2px #000;
+	background: #008080;
+	opacity: .95;
+	margin-right: 0;
+	float: left;
+	margin-bottom: 25px;
+}
+
+.hide:hover, .show:hover {
+	color: #eee;
+	text-shadow: 0 0 1px #666;
+	text-decoration: none;
+	box-shadow: 0 0 4px #222 inset;
+	opacity: 1;
+	margin-bottom: 25px;
+}
+
+.control_panel form{
+    /*border: 2px solid black;*/
+    top: 25px;
+	float: left;
+	height: auto;
+	width: 40vw;
+	line-height: 20px;
+	padding-left: 10px;
+	margin-bottom: 25px;
+	/*font-size: 16px;*/
+}
+
+/****** Button ******/
+.graph_btn {
+	background-color:transparent;
+	-moz-border-radius:23px;
+	-webkit-border-radius:23px;
+	border-radius:23px;
+	border:1px solid #b7b7b7;
+	display:inline-block;
+	cursor:pointer;
+	color:#777777;
+    font-weight: 300;
+	font-size:14px;
+	padding:10px 20px;
+	text-decoration:none;
+
+}
+.graph_btn:hover {
+	background-color:transparent;
+    border: 1px solid #777777;
+}
+.graph_btn:active {
+	position:relative;
+	top:1px;
+}
