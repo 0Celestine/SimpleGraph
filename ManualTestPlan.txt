@@ -3,9 +3,9 @@ Step 1:
 Step 2:
     Make sure the output makes sense and is what you expected.
 Step 3:
-    Delete most of console.log() statements so people won't think you're a imbecile
+    Delete most of console.log() statements so people won't think you're an imbecile
     who only knows how to debug using print statements.
 
 
 If you do these steps correctly and rigorously check at every conceivable var assignment
-or return, you should be able to continue writing without worrying about functions already written.
+or return, you should be able to continue writing without worrying too much about functions already written.
