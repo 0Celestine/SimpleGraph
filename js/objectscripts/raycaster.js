@@ -1,6 +1,7 @@
 /**
  * @author Lee Stemkoski
  * Sourced from http://stemkoski.github.io/Three.js/Mouse-Over.html
+ * Changed to acommodate THREE.Projector deprecation, and some styling.
  */
 
 function onDocumentMouseMove(event) {

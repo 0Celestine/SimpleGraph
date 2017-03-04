@@ -1,11 +1,18 @@
 //bar graph, network graph
+//TODO really should only be type number. In parse, clean up the data and add numeric type for arrays and etc.
+//TODO 2D/3D toggle
+//TODO set label fields
+//TODO set axis lenth fields
+//TODO logarithmic/linear scale toggle
+//TODO include smal data window
+
 
 /*jshint esversion: 6 */
 var ORIGIN = new THREE.Vector3(0, 0, 0);
 var X_AXIS = new THREE.Vector3(1, 0, 0);
 var Y_AXIS = new THREE.Vector3(0, 1, 0);
 var Z_AXIS = new THREE.Vector3(0, 0, 1);
-var GRAPH = {"graph_type":"", "3D":true, "axes_attr":[], "scale_log": true, "axes_range":[], "axes_labels":[]};
+var GRAPH;
 
 
 /**
@@ -213,17 +220,19 @@ function scatterPlot(type, axes) {
 
 }
 
+
 function drawGraph(){
-    console.log("GRPAH TIME");
     //Grab data from form and store
-    var graph_type = $( "#graph_select" ).val();
-    console.log(graph_type);
-    var x_axis_data = $("#x_axis_select").val();
-    console.log(x_axis_data);
-    var y_axis_data = $("#y_axis_select").val();
-    console.log(y_axis_data);
-    var z_axis_data = $("#z_axis_select").val();
-    console.log(z_axis_data);
+    GRAPH = new Graph();
+    extractFormContents();
+    console.log(GRAPH);
+}
 
-
+function Graph(){
+    this.graph_type = "";
+    this.is3D = true;
+    this.axes_attr = [];
+    this.scale_log = true;
+    this.axes_range = [];
+    this.axes_labels = [];
 }

@@ -67,18 +67,11 @@ function init() {
     controls.noPan = false;
     controls.staticMoving = true;
     controls.dynamicDampingFactor = 0.6;
-    //controls.target.set(0, camera.position.y*0.5, 0);
     controls.target.set(0, camera_pos.y*0.25, 0);
-
-
-    // RAYCASTING
-
-    // when the mouse moves, call the given function
-    document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-
 
     //EVENT LISTENERS
     window.addEventListener('keydown', onKeyDown, false);
+    document.addEventListener( 'mousemove', onDocumentMouseMove, false );
     /* window.addEventListener('keyup', onKeyUp, false);*/
     //window.addEventListener( 'mousemove', onMouseMove, false);
 

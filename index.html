@@ -64,12 +64,10 @@
     <!-- Main js scripts -->
     <script type="text/javascript" src="js/parse.js"></script>
     <script type="text/javascript" src="js/objectscripts/raycaster.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
-    <script type="text/javascript" src="js/graph.js"></script>s
     <script type="text/javascript" src="js/objectscripts/select.js"></script>
-    <script type="text/javascript" src="js/controls.js"></script>
 
-
+    <script type="text/javascript" src="js/graph.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
 
     <script type="text/javascript">
 
@@ -89,6 +87,34 @@
 
                 }
             }
+        }
+
+        /**
+        * Checks that all necessary fields in controls have been filled correctly.
+        */
+        function checkFormValidity(){
+
+        }
+        /**
+        * Gets all the values from the controls and stores them into GRAPH
+        */
+        function extractFormContents(){
+
+            //Set graph_type
+            GRAPH.graph_type = $( "#graph_select" ).val();
+            //Set 3D
+
+            //Set axes_attr
+            GRAPH.axes_attr.push(
+                $("#x_axis_select").val(),
+                $("#y_axis_select").val(),
+                $("#z_axis_select").val()
+                );
+            //Set scale_log
+
+            //Set axes_range
+
+            //Set axes_labels
         }
         fillAxes();
         tamingselect();
