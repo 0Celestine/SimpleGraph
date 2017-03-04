@@ -1,0 +1,11 @@
+Step 1:
+    Write a bunch of console.log() statements. Everywhere.
+Step 2:
+    Make sure the output makes sense and is what you expected.
+Step 3:
+    Delete most of console.log() statements so people won't think you're a imbecile
+    who only knows how to debug using print statements.
+
+
+If you do these steps correctly and rigorously check at every conceivable var assignment
+or return, you should be able to continue writing without worrying about functions already written.

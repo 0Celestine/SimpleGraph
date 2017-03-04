@@ -172,12 +172,11 @@ function findAndPlotPoints(data_set, attributes) {
         }
         //console.log(point);
         var point_geometry = new THREE.SphereGeometry(1.0);
-        point_geometry.name = getAttributeValue(data_set, object, "name");
+        var pointMaterial = new THREE.MeshLambertMaterial({color: 0x20b2aa, transparent:true, opacity:0.8});
+        var data_point = new THREE.Mesh(point_geometry, pointMaterial);
 
-        //var color = new THREE.Color(0xff0000);
-        var point_material = new THREE.MeshLambertMaterial();
-        point_material.color.set(0x6495ed);
-        var data_point = new THREE.Mesh(point_geometry, point_material);
+        var point_name = getAttributeValue(data_set, object, "json_class").concat(":", getAttributeValue(data_set, object, "name"));
+        data_point.name = point_name;
         data_point.position.set(point[0], point[1], point[2]);
         //console.log(data_point);
         scene.add(data_point);
@@ -216,5 +215,15 @@ function scatterPlot(type, axes) {
 
 function drawGraph(){
     console.log("GRPAH TIME");
-    //Grab data from form and store in GRAPH
+    //Grab data from form and store
+    var graph_type = $( "#graph_select" ).val();
+    console.log(graph_type);
+    var x_axis_data = $("#x_axis_select").val();
+    console.log(x_axis_data);
+    var y_axis_data = $("#y_axis_select").val();
+    console.log(y_axis_data);
+    var z_axis_data = $("#z_axis_select").val();
+    console.log(z_axis_data);
+
+
 }

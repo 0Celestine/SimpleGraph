@@ -20,7 +20,7 @@
             <form action="">
                 <p>
                     <label class="label">Graph Type:</label>
-                    <select class="turnintodropdown">
+                    <select class="turnintodropdown" id="graph_select">
 						<option>Select a graph type:</option>
                         <option value="scatter">Scatter</option>
                         <option value="network">Network</option>
@@ -30,17 +30,17 @@
                 </p>
                 <p>
                     <label class="label">Axes:</label>
-                    <select class="turnintodropdown" name="axis">
+                    <select class="turnintodropdown" name="axis" id="x_axis_select">
                         <option>Select x-axis data:</option>
                     </select>
                 </p>
                 <p>
-                    <select class="turnintodropdown" name="axis">
+                    <select class="turnintodropdown" name="axis" id="y_axis_select">
                         <option>Select y-axis data:</option>
                     </select>
                 </p>
                 <p>
-                    <select class="turnintodropdown" name="axis">
+                    <select class="turnintodropdown" name="axis" id="z_axis_select">
                         <option>Select z-axis data:</option>
                     </select>
                 </p>
@@ -60,18 +60,20 @@
     <!-- three.js and TrackballControls libraries-->
     <script type="text/javascript" src="js/libs/three.js"></script>
     <script type="text/javascript" src="js/libs/TrackballControls.js"></script>
+
     <!-- Main js scripts -->
     <script type="text/javascript" src="js/parse.js"></script>
+    <script type="text/javascript" src="js/objectscripts/raycaster.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript" src="js/graph.js"></script>s
-    <script type="text/javascript" src="js/select.js"></script>
+    <script type="text/javascript" src="js/objectscripts/select.js"></script>
     <script type="text/javascript" src="js/controls.js"></script>
+
 
 
     <script type="text/javascript">
 
         scatterPlot("Actor", ["age", "total_gross", "movies"]);
-        //extractQuantAttributes();
 
         /**
          * Populates the axis select options.
@@ -84,7 +86,7 @@
                     //console.log(typeof select_text, select_text);
                     var new_select = "<option></option>";
                     $(new_select).attr("value", select_text).text(select_text).appendTo("[name=axis]");
-                
+
                 }
             }
         }
