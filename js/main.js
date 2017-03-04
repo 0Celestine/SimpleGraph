@@ -94,6 +94,17 @@ function setCamera() {
 
 }
 
+//TODO Not working
+function clearScene(){
+    //console.log(scene.children);
+    scene.children.forEach(function(object){
+        if(object instanceof THREE.Mesh || object instanceof THREE.Line)
+            //console.log("DISPOSE");
+            scene.remove(object);
+    });
+}
+
+
 function animate() {
     requestAnimationFrame(animate);
     renderer.render(scene, camera);

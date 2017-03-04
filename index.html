@@ -28,6 +28,13 @@
                         <option value="bar">Bar</option>
 					</select>
                 </p>
+                <div class="flipswitch">
+                    <input type="checkbox" name="flipswitch" class="flipswitch-cb" id="fs" checked>
+                    <label class="flipswitch-label" for="fs">
+                        <div class="flipswitch-inner"></div>
+                        <div class="flipswitch-switch"></div>
+                    </label>
+                </div>
                 <p>
                     <label class="label">Axes:</label>
                     <select class="turnintodropdown" name="axis" id="x_axis_select">
@@ -70,8 +77,7 @@
     <script type="text/javascript" src="js/main.js"></script>
 
     <script type="text/javascript">
-
-        scatterPlot("Actor", ["age", "total_gross", "movies"]);
+        //scatterPlot("Actor", ["age", "total_gross", "movies"]);
 
         /**
          * Populates the axis select options.
@@ -90,26 +96,31 @@
         }
 
         /**
-        * Checks that all necessary fields in controls have been filled correctly.
-        */
-        function checkFormValidity(){
+         * Checks that all necessary fields in controls have been filled correctly.
+         */
+        function checkFormValidity() {
 
         }
         /**
-        * Gets all the values from the controls and stores them into GRAPH
-        */
-        function extractFormContents(){
+         * Gets all the values from the controls and stores them into GRAPH
+         */
+        function extractFormContents() {
 
             //Set graph_type
-            GRAPH.graph_type = $( "#graph_select" ).val();
+            GRAPH.graph_type = $("#graph_select").val();
             //Set 3D
 
-            //Set axes_attr
+            //Set json_class and axes_attr
+            var x_axis_value = $("#x_axis_select").val().split(" ");
+            var y_axis_value = $("#y_axis_select").val().split(" ")
+            var z_axis_value = $("#z_axis_select").val().split(" ")
+
+            GRAPH.json_class = x_axis_value[0];
             GRAPH.axes_attr.push(
-                $("#x_axis_select").val(),
-                $("#y_axis_select").val(),
-                $("#z_axis_select").val()
-                );
+                x_axis_value[1],
+                y_axis_value[1],
+                z_axis_value[1]
+            );
             //Set scale_log
 
             //Set axes_range
@@ -118,7 +129,6 @@
         }
         fillAxes();
         tamingselect();
-
     </script>
 
 

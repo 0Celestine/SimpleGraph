@@ -220,16 +220,24 @@ function scatterPlot(type, axes) {
 
 }
 
-
+//TODO reset options
+//TODO camera control buttons
+//TODO Select for DATA typ
 function drawGraph(){
+    //clearScene();
     //Grab data from form and store
     GRAPH = new Graph();
     extractFormContents();
     console.log(GRAPH);
+
+    //Clear scene
+
+    scatterPlot(GRAPH.json_class, GRAPH.axes_attr);
 }
 
 function Graph(){
     this.graph_type = "";
+    this.json_class = "";
     this.is3D = true;
     this.axes_attr = [];
     this.scale_log = true;
