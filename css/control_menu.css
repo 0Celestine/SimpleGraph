@@ -13,6 +13,17 @@
     float: left;
     /*overflow-y: scroll;*/
 }
+form{
+    /*border: 2px solid black;*/
+    padding: 15px;
+    float: left;
+}
+.control_panel2{
+    top: 56px;
+    /*border: 2px solid black;*/
+    padding-top: 0px;
+    position: relative;
+}
 .show {
     display: none;
 }
@@ -53,25 +64,28 @@
 	margin-bottom: 25px;
 }
 
-.control_panel form{
+.control_panel{
     /*border: 2px solid black;*/
     top: 25px;
 	float: left;
-	height: auto;
-	width: 40vw;
+	/*height: 100vh;*/
+    /*overflow-y: scroll;*/
+	width: 80vw;
+    min-width: 320px;
+    overflow-x: scroll;
 	line-height: 20px;
-	padding-left: 10px;
+	padding-left: 0px;
 	margin-bottom: 25px;
 	/*font-size: 16px;*/
 }
 
 /****** Button ******/
 .graph_btn {
-	background-color:transparent;
+	background-color: #FFFFFF;
 	-moz-border-radius:23px;
 	-webkit-border-radius:23px;
 	border-radius:23px;
-	border:1px solid #b7b7b7;
+	border:1px solid #ccc;
 	display:inline-block;
 	cursor:pointer;
 	color:#777777;
@@ -98,24 +112,24 @@
 
 /****** Toggle ****/
 
-.flipswitch {
+.toggle {
   position: relative;
   width: 86px;
   -webkit-user-select:none;
   -moz-user-select:none;
   -ms-user-select: none;
 }
-.flipswitch input[type=checkbox] {
+.toggle input[type=checkbox] {
   display: none;
 }
-.flipswitch-label {
+.toggle-label {
   display: block;
   overflow: hidden;
   cursor: pointer;
-  border: 1px solid #B7B7B7;
+  border: 1px solid #ccc;
   border-radius: 0px;
 }
-.flipswitch-inner {
+.toggle-inner {
   width: 200%;
   margin-left: -100%;
   -webkit-transition: margin 0.3s ease-in 0s;
@@ -124,12 +138,12 @@
   -o-transition: margin 0.3s ease-in 0s;
   transition: margin 0.3s ease-in 0s;
 }
-.flipswitch-inner:before, .flipswitch-inner:after {
+.toggle-inner:before, .toggle-inner:after {
   float: left;
   width: 50%;
   height: 40px;
-  padding: 0;
-  line-height: 40px;
+  padding: 10px;
+  /*line-height: 40px;*/
   font-size: 16px;
   font-weight: 300;
   color: white;
@@ -137,42 +151,42 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
-.flipswitch-inner:before {
+.toggle-inner:before {
   content: "2D";
   padding-left: 10px;
   background-color: #FFFFFF;
   color: #777777;
 }
-.flipswitch-inner:after {
+.toggle-inner:after {
   content: "3D";
   padding-right: 10px;
   background-color: #FFFFFF;
   color: #777777;
   text-align: right;
 }
-.flipswitch-switch {
+.toggle-switch {
   width: 20px;
-  margin: 5.5px;
+  margin: 10px;
   background: #FFFFFF;
-  border: 1px solid #B7B7B7;
+  border: 1px solid #ccc;
   border-radius: 0px;
   position: absolute;
   top: 0px;
   bottom: 0;
-  right: 54px;
+  right: 45px;
   -webkit-transition: all 0.3s ease-in 0s;
   -moz-transition: all 0.3s ease-in 0s;
   -ms-transition: all 0.3s ease-in 0s;
   -o-transition: all 0.3s ease-in 0s;
   transition: all 0.3s ease-in 0s;
 }
-.flipswitch:hover .flipswitch-switch{
+.toggle:hover .toggle-switch{
 	background:#f5f5f5;
     /*border: 1px solid #777777;*/
 }
-.flipswitch-cb:checked + .flipswitch-label .flipswitch-inner {
+.toggle-cb:checked + .toggle-label .toggle-inner {
   margin-left: 0;
 }
-.flipswitch-cb:checked + .flipswitch-label .flipswitch-switch {
+.toggle-cb:checked + .toggle-label .toggle-switch {
   right: 0;
 }

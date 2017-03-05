@@ -49,6 +49,7 @@ function tamingselect()
 				newli.elm=hiddenfield;
 				newli.istrigger=trigger;
 				newa.href='#';
+
 				newa.appendChild(document.createTextNode(
 				sels[i].getElementsByTagName('option')[j].text));
 				newli.onclick=function(){
@@ -56,7 +57,9 @@ function tamingselect()
 					ts_swapclass(this.istrigger,ts_triggeron,ts_triggeroff);
 					ts_swapclass(this.parentNode,ts_dropdownopen,ts_dropdownclosed);
 					this.istrigger.firstChild.nodeValue=this.firstChild.firstChild.nodeValue;
+					//checkChanges();
 					return false;
+
 				};
 				newli.appendChild(newa);
 				replaceUL.appendChild(newli);

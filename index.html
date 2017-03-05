@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Grapher</title>
+    <title>SimpleGraph</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="css/control_menu.css">
@@ -21,38 +21,45 @@
                 <p>
                     <label class="label">Graph Type:</label>
                     <select class="turnintodropdown" id="graph_select">
-						<option>Select a graph type:</option>
-                        <option value="scatter">Scatter</option>
-                        <option value="network">Network</option>
-                        <option value="line">Line</option>
-                        <option value="bar">Bar</option>
-					</select>
+						    <option value="none">Select a graph type:</option>
+                            <option value="scatter">Scatter</option>
+                            <option value="network">Network</option>
+                            <option value="line">Line</option>
+                            <option value="bar">Bar</option>
+				    	</select>
                 </p>
-                <div class="flipswitch">
-                    <input type="checkbox" name="flipswitch" class="flipswitch-cb" id="fs" checked>
-                    <label class="flipswitch-label" for="fs">
-                        <div class="flipswitch-inner"></div>
-                        <div class="flipswitch-switch"></div>
-                    </label>
-                </div>
+                <p>
+                    <label class="label">Data set:</label>
+                    <select class="turnintodropdown" id="data_set">
+                        <option value="none">Select data set:</option>
+                    </select>
+                </p>
+
                 <p>
                     <label class="label">Axes:</label>
-                    <select class="turnintodropdown" name="axis" id="x_axis_select">
-                        <option>Select x-axis data:</option>
-                    </select>
+                    <select class="turnintodropdown" name="axis" id="x_axis_select"></select>
                 </p>
                 <p>
-                    <select class="turnintodropdown" name="axis" id="y_axis_select">
-                        <option>Select y-axis data:</option>
-                    </select>
+                    <select class="turnintodropdown" name="axis" id="y_axis_select"></select>
                 </p>
                 <p>
-                    <select class="turnintodropdown" name="axis" id="z_axis_select">
-                        <option>Select z-axis data:</option>
-                    </select>
+                    <select class="turnintodropdown" name="axis" id="z_axis_select"></select>
                 </p>
                 <a class="graph_btn" onclick="drawGraph()">GRAPH!</a>
             </form>
+
+            <form class="control_panel2">
+
+                <div class="toggle">
+                    <input type="checkbox" name="toggle" class="toggle-cb" id="2D3D" checked>
+                    <label class="toggle-label" for="2D3D">
+                        <div class="toggle-inner"></div>
+                        <div class="toggle-switch"></div>
+                    </label>
+                </div>
+
+            </form>
+
 
 
         </div>
@@ -77,23 +84,52 @@
     <script type="text/javascript" src="js/main.js"></script>
 
     <script type="text/javascript">
-        //scatterPlot("Actor", ["age", "total_gross", "movies"]);
+
+        extractQuantAttributes();
+
+        /**
+         * Populates data set select options.
+         */
+        function fillDataSet() {
+            var data_sets = Object.keys(QUANT_ATTR);
+            for (var i = 0; i < data_sets.length; i++) {
+                var select_text = data_sets[i];
+                var new_select = "<option></option>";
+                $(new_select).attr("value", select_text).text(select_text).appendTo("#data_set");
+            }
+        }
+
+        $(document).on('change', '#data_set', function() {
+            $('option[value="none"]', this).remove();
+            fillAxes($("#data_set").val());
+        });
+
+        $(document).on('change', '[name="axis"]', function() {
+            $('option[value="none"]', this).remove();
+        });
 
         /**
          * Populates the axis select options.
          */
-        function fillAxes() {
-            var quant_attr = extractQuantAttributes();
-            for (var obj in quant_attr) {
-                for (var attribute in quant_attr[obj]) {
-                    var select_text = obj.concat(" ", quant_attr[obj][attribute]);
-                    //console.log(typeof select_text, select_text);
-                    var new_select = "<option></option>";
-                    $(new_select).attr("value", select_text).text(select_text).appendTo("[name=axis]");
+        function fillAxes(type) {
+            //First clear the options
+            $("[name=axis] option").remove();
+            //Add initial select messages
+            $("<option></option>").attr("value", "none").text("Select x-axis data:").appendTo("#x_axis_select");
+            $("<option></option>").attr("value", "none").text("Select y-axis data:").appendTo("#y_axis_select");
+            $("<option></option>").attr("value", "none").text("Select z-axis data:").appendTo("#z_axis_select");
 
-                }
+            //Get the data set to be used
+            //console.log(type);
+            for (var i = 0; i<QUANT_ATTR[type].length; i++) {
+                var new_select = "<option></option>";
+                var attribute = QUANT_ATTR[type][i];
+                $(new_select).attr("value", attribute).text(attribute).appendTo("[name=axis]");
+
             }
+
         }
+
 
         /**
          * Checks that all necessary fields in controls have been filled correctly.
@@ -109,26 +145,32 @@
             //Set graph_type
             GRAPH.graph_type = $("#graph_select").val();
             //Set 3D
+            if($('#2D3D').is(":checked")){
+                GRAPH.is2D = true;
+            }
+            else{
+                GRAPH.is2D = false;
+            }
 
-            //Set json_class and axes_attr
-            var x_axis_value = $("#x_axis_select").val().split(" ");
-            var y_axis_value = $("#y_axis_select").val().split(" ")
-            var z_axis_value = $("#z_axis_select").val().split(" ")
-
-            GRAPH.json_class = x_axis_value[0];
+            //Set json_class
+            GRAPH.json_class = $("#data_set").val();
+            //Set axes_attr
             GRAPH.axes_attr.push(
-                x_axis_value[1],
-                y_axis_value[1],
-                z_axis_value[1]
+                $("#x_axis_select").val(),
+                $("#y_axis_select").val(),
+                $("#z_axis_select").val()
             );
             //Set scale_log
+
 
             //Set axes_range
 
             //Set axes_labels
         }
-        fillAxes();
-        tamingselect();
+
+        fillDataSet();
+        //tamingselect();
+
     </script>
 
 

@@ -5,6 +5,7 @@
 //TODO set axis lenth fields
 //TODO logarithmic/linear scale toggle
 //TODO include smal data window
+//TODO let user decide radius, informative color
 
 
 /*jshint esversion: 6 */
@@ -178,7 +179,7 @@ function findAndPlotPoints(data_set, attributes) {
             }
         }
         //console.log(point);
-        var point_geometry = new THREE.SphereGeometry(1.0);
+        var point_geometry = new THREE.SphereGeometry(1.0, 10,10);
         var pointMaterial = new THREE.MeshLambertMaterial({color: 0x20b2aa, transparent:true, opacity:0.8});
         var data_point = new THREE.Mesh(point_geometry, pointMaterial);
 
@@ -190,7 +191,7 @@ function findAndPlotPoints(data_set, attributes) {
     }
 }
 
-//TODO let user decide radius, informative color
+
 /**
  * Make a scatter plot given the x_axis, y_axis, and z_axis labels
  *@param {String} type - "Actor" or "Movie"
@@ -223,22 +224,23 @@ function scatterPlot(type, axes) {
 //TODO reset options
 //TODO camera control buttons
 //TODO Select for DATA typ
+//TODO scale up or down, linear or log
 function drawGraph(){
-    //clearScene();
+    clearScene();
     //Grab data from form and store
+    console.log(GRAPH);
     GRAPH = new Graph();
+    console.log(GRAPH);
     extractFormContents();
     console.log(GRAPH);
 
-    //Clear scene
-
-    scatterPlot(GRAPH.json_class, GRAPH.axes_attr);
+    //scatterPlot(GRAPH.json_class, GRAPH.axes_attr);
 }
 
 function Graph(){
     this.graph_type = "";
     this.json_class = "";
-    this.is3D = true;
+    this.is2D = true;
     this.axes_attr = [];
     this.scale_log = true;
     this.axes_range = [];

@@ -4,6 +4,8 @@
 
 /*jshint esversion: 6 */
 
+var QUANT_ATTR;
+
 /**
  * Return the number of digits in a given number
  *@param {Number}
@@ -55,11 +57,11 @@ function getAttributeRange(data_set, attribute) {
 
 /**
 * Goes through JSON and finds quantifiable attributes.
-*@return {Dictionary[]} - json_class:attribute
 */
 function extractQuantAttributes(){
 
-    var type_dict = {};
+    QUANT_ATTR = {};
+
     for(var i = 0; i<data.length;i++){
 
         var first_key = Object.keys(data[i])[0]; //Gets first dictionary key
@@ -73,8 +75,7 @@ function extractQuantAttributes(){
             }
         }
         //console.log(numerics);
-        type_dict[type_key] = numerics;
+        QUANT_ATTR[type_key] = numerics;
     }
-    //console.log(type_dict);
-    return type_dict;
+
 }

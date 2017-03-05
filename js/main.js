@@ -87,6 +87,8 @@ function onKeyDown(event) {
     }
 }
 
+//TODO How to rotate light with camera
+
 function setCamera() {
     //console.log(point);
     camera.position.set(camera_pos.x, camera_pos.y, camera_pos.z);
@@ -94,14 +96,16 @@ function setCamera() {
 
 }
 
-//TODO Not working
 function clearScene(){
     //console.log(scene.children);
-    scene.children.forEach(function(object){
-        if(object instanceof THREE.Mesh || object instanceof THREE.Line)
-            //console.log("DISPOSE");
-            scene.remove(object);
-    });
+    for (i = scene.children.length - 1; i >= 0; i--) {
+        var obj = scene.children[i];
+        if (obj.type == "Mesh" || obj.type   == "Line") {
+            scene.remove(obj);
+            obj.geometry.dispose();
+            obj.material.dispose();
+        }
+    }
 }
 
 
