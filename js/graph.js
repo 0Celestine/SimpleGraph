@@ -45,9 +45,11 @@ function calculateScaledNumber(range, number) {
  *@param {Material} material
  */
 function drawLine(point1, point2, material) {
+
     var line_geometry = new THREE.Geometry();
     line_geometry.vertices.push(point1, point2);
     var line = new THREE.Line(line_geometry, material);
+    console.log(line);
     scene.add(line);
 }
 
@@ -232,17 +234,37 @@ function drawGraph(){
     clearScene();
     //Clear the information panel and make it invisible until raycasting.
     $(".information_panel").empty();
-    //$(".information_panel").css("visibility", "hidden");
-
     //Grab data from form and store
-    console.log(GRAPH);
+    //console.log(GRAPH);
     GRAPH = new Graph();
-    console.log(GRAPH);
     extractFormContents();
-    console.log(GRAPH);
+    //console.log(GRAPH);
 
-    scatterPlot(GRAPH.json_class, GRAPH.axes_attr);
-    setCamera();
+    switch(GRAPH.graph_type){
+        case "scatter":
+            scatterPlot(GRAPH.json_class, GRAPH.axes_attr);
+            break;
+        case "network":
+            //nothing yet
+            break;
+        case "line":
+            //nothing yet
+            break;
+        case "bar":
+            //nothing yet
+            break;
+        default:
+            //do nothing
+    }
+
+    if(GRAPH.is2D === true){
+        setCamera2D();
+    }
+    else{
+        setCamera3D();
+    }
+
+    //console.log(scene.children);
 }
 
 function Graph(){

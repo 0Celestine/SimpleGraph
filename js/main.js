@@ -7,6 +7,7 @@ var mouse = { x: 0, y: 0 }, INTERSECTED;
 init();
 animate();
 
+//TODO multiple cameras? Perspective and Orthographic for 3D/2D?
 function init() {
 
     //SCENE
@@ -89,14 +90,22 @@ function onKeyDown(event) {
 
 //TODO How to rotate light with camera
 
-function setCamera() {
+function setCamera3D() {
     //console.log(point);
     /*camera.position.set(camera_pos.x, camera_pos.y, camera_pos.z);
     controls.target.set(0, camera_pos.y*0.5, 0);
     */
     controls.reset();
+    controls.noRotate = false;
     controls.target.set(0, camera_pos.y*0.25, 0);
 
+}
+
+function setCamera2D(){
+    controls.reset();
+    controls.noRotate = true;
+    camera.position.set(0, 0, 100);
+    controls.target.set(0, 30, 0);
 }
 
 function clearScene(){

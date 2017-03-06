@@ -4,8 +4,7 @@
 
 /*jshint esversion: 6 */
 
-//TODO generalize to take any json
-var QUANT_ATTR;
+var QUANT_ATTR; //Dictionary
 
 
 /**
@@ -50,6 +49,7 @@ function getAttributeRange(data_set, attribute) {
         } else {
             numbers.push(value);
         }
+        
     }
 
     var range = {"anomalies":num_anomalies, "minimum":Math.min(...numbers), "maximum":Math.max(...numbers)};
