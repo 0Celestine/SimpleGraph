@@ -13,25 +13,24 @@ function getPointData(point_name){
 *@param {Dictionary} point_data
 */
 function displayPointData(point_data){
-    $(".information_panel").empty();
+    $("#point_data_panel").empty();
 
     for(var attribute in point_data){
         //console.log(attribute);
         if( !(point_data[attribute] instanceof Array) ){
             var attr_label = attribute.toUpperCase().concat(":");
-            $("<label></label>").text(attr_label).appendTo(".information_panel");
+            $("<label></label>").text(attr_label).appendTo("#point_data_panel");
             var attr_val = point_data[attribute];
-            $('<p class="indent"></p>').text(attr_val).appendTo(".information_panel");
+            $('<p class="indent"></p>').text(attr_val).appendTo("#point_data_panel");
         }
         else{
             var array_label = attribute.toUpperCase().concat(":");
-            $("<label></label>").text(array_label).appendTo(".information_panel");
+            $("<label></label>").text(array_label).appendTo("#point_data_panel");
             var array_val;
             for(var i = 0; i < point_data[attribute].length; i++){
                 array_val = point_data[attribute][i];
-                $('<p class="indent"></p>').text(array_val).appendTo(".information_panel");
+                $('<p class="indent"></p>').text(array_val).appendTo("#point_data_panel");
             }
-
         }
     }
 

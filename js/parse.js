@@ -23,9 +23,9 @@ function getNumDigits(number) {
  */
 function getAttributeValue(data_set, object, attribute) {
     value = data_set[object][attribute];
-    if ((attribute == "total_gross" || attribute == "box_office") && getNumDigits(value) <= 4) {
+    /*if ((attribute == "total_gross" || attribute == "box_office") && getNumDigits(value) <= 4) {
         value *= 1000000;
-    }
+    }*/
     return value;
 }
 
@@ -44,12 +44,12 @@ function getAttributeRange(data_set, attribute) {
         if (value instanceof Array) {
             value = value.length;
         }
-        if (value <= 0) {
+        if (value <= 0) {  // <--------- TODO NEED TO CHANGE, anomalies is just defined for convenience. Will need to change log scaleing too.
             num_anomalies += 1;
         } else {
             numbers.push(value);
         }
-        
+
     }
 
     var range = {"anomalies":num_anomalies, "minimum":Math.min(...numbers), "maximum":Math.max(...numbers)};

@@ -1,8 +1,20 @@
 /*TODO make sub crollable panels for arrays*/
+
+.info_panel{
+    /*border: 1px solid black;*/
+    width: auto;
+    height: auto;
+    position: absolute;
+    right:0px;
+    top: 0px;
+
+}
 .information_panel{
     right: 5px;
     top: 5px;
-    position: absolute;
+    margin-bottom: 5px;
+    /*position: absolute;*/
+    position: relative;
     background: #ffffff;
     color: rgba(0,0,0,0);
     /*border: 1px solid black;*/
@@ -16,8 +28,8 @@
     -moz-transition: all 0.3s ease-in 0s;
     -o-transition: all 0.3s ease-in 0s;
     transition: all 0.3s ease-in 0s;
-    max-height: 90vh;
-    overflow-y: scroll;
+    max-height: 40vh;
+    overflow-x: hidden;
 
 }
 

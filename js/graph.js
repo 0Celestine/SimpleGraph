@@ -49,7 +49,7 @@ function drawLine(point1, point2, material) {
     var line_geometry = new THREE.Geometry();
     line_geometry.vertices.push(point1, point2);
     var line = new THREE.Line(line_geometry, material);
-    console.log(line);
+    //console.log(line);
     scene.add(line);
 }
 
@@ -181,7 +181,15 @@ function findAndPlotPoints(data_set, attributes) {
             }
         }
         //console.log(point);
-        var point_geometry = new THREE.SphereGeometry(1.0, 10,10);
+
+        var point_geometry;
+        if(GRAPH.is2D){
+            point_geometry = new THREE.CircleGeometry(1.0, 20);
+        }
+        else{
+            point_geometry = new THREE.SphereGeometry(1.0, 10,10);
+        }
+
         var pointMaterial = new THREE.MeshLambertMaterial({color: 0x20b2aa, transparent:true, opacity:0.8});
         var data_point = new THREE.Mesh(point_geometry, pointMaterial);
 

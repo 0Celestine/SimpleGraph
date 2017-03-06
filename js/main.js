@@ -106,6 +106,7 @@ function setCamera2D(){
     controls.noRotate = true;
     camera.position.set(0, 0, 100);
     controls.target.set(0, 30, 0);
+
 }
 
 function clearScene(){

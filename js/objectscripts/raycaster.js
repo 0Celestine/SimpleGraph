@@ -34,7 +34,7 @@ function update() {
             INTERSECTED.currentHex = INTERSECTED.material.color.getHex();
             // set a new color for closest object
             //console.log(INTERSECTED.name);
-            if(INTERSECTED.geometry instanceof THREE.SphereGeometry){
+            if(INTERSECTED.geometry instanceof THREE.SphereGeometry || INTERSECTED.geometry instanceof THREE.CircleGeometry  ){
                 INTERSECTED.material.color.setHex(INTERSECTED.currentHex^0xfff000);
                 INTERSECTED.material.transparent = false;
                 //console.log(INTERSECTED);
