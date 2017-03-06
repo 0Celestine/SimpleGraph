@@ -1,3 +1,4 @@
+/*TODO make sub crollable panels for arrays*/
 .information_panel{
     right: 5px;
     top: 5px;
@@ -15,12 +16,12 @@
     -moz-transition: all 0.3s ease-in 0s;
     -o-transition: all 0.3s ease-in 0s;
     transition: all 0.3s ease-in 0s;
+    max-height: 90vh;
+    overflow-y: scroll;
 
 }
-
 
 .information_panel:hover{
     box-shadow: 0px 0px 2px #b7b7b7 inset;
 
-    /*border: 1px solid #eaeaea;*/
 }
