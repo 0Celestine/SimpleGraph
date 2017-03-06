@@ -37,6 +37,10 @@ function update() {
             if(INTERSECTED.geometry instanceof THREE.SphereGeometry){
                 INTERSECTED.material.color.setHex(INTERSECTED.currentHex^0xfff000);
                 INTERSECTED.material.transparent = false;
+                //console.log(INTERSECTED);
+                //Grab data for point and display info.
+                var point_data = getPointData(INTERSECTED.name);
+                displayPointData(point_data);
             }
         }
     } else {

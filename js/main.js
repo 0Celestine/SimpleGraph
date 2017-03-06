@@ -91,8 +91,11 @@ function onKeyDown(event) {
 
 function setCamera() {
     //console.log(point);
-    camera.position.set(camera_pos.x, camera_pos.y, camera_pos.z);
+    /*camera.position.set(camera_pos.x, camera_pos.y, camera_pos.z);
     controls.target.set(0, camera_pos.y*0.5, 0);
+    */
+    controls.reset();
+    controls.target.set(0, camera_pos.y*0.25, 0);
 
 }
 

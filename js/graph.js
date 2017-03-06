@@ -183,8 +183,11 @@ function findAndPlotPoints(data_set, attributes) {
         var pointMaterial = new THREE.MeshLambertMaterial({color: 0x20b2aa, transparent:true, opacity:0.8});
         var data_point = new THREE.Mesh(point_geometry, pointMaterial);
 
-        var point_name = getAttributeValue(data_set, object, "json_class").concat(":", getAttributeValue(data_set, object, "name"));
-        data_point.name = point_name;
+        //console.log(JSON.stringify(data_set[object]));
+        //var point_name = getAttributeValue(data_set, object, "json_class").concat(":", object);
+        //data_point.name = point_name;
+
+        data_point.name = JSON.stringify(data_set[object]); //Assign the object to the name as a string for easier lookup
         data_point.position.set(point[0], point[1], point[2]);
         //console.log(data_point);
         scene.add(data_point);
@@ -208,6 +211,7 @@ function scatterPlot(type, axes) {
     //Setup the axes and labels.
     var axis_end_points = [0, 0, 0]; //Should contain at least 2 points.
     for (var i = 0; i < axes.length; i += 1) {
+
         var range = getAttributeRange(data_set, axes[i]);
         axis_end_points[i] = drawAxis(i, range); //Stored axis endpoints for positioning of labels and camera.
         drawLabel(axis_end_points[i], axes[i], i);
@@ -221,12 +225,15 @@ function scatterPlot(type, axes) {
 
 }
 
-//TODO reset options
 //TODO camera control buttons
-//TODO Select for DATA typ
 //TODO scale up or down, linear or log
 function drawGraph(){
+    //Clear any existing graphs from the display
     clearScene();
+    //Clear the information panel and make it invisible until raycasting.
+    $(".information_panel").empty();
+    //$(".information_panel").css("visibility", "hidden");
+
     //Grab data from form and store
     console.log(GRAPH);
     GRAPH = new Graph();
@@ -234,7 +241,8 @@ function drawGraph(){
     extractFormContents();
     console.log(GRAPH);
 
-    //scatterPlot(GRAPH.json_class, GRAPH.axes_attr);
+    scatterPlot(GRAPH.json_class, GRAPH.axes_attr);
+    setCamera();
 }
 
 function Graph(){

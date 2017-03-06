@@ -4,7 +4,9 @@
 
 /*jshint esversion: 6 */
 
+//TODO generalize to take any json
 var QUANT_ATTR;
+
 
 /**
  * Return the number of digits in a given number
@@ -59,6 +61,7 @@ function getAttributeRange(data_set, attribute) {
 * Goes through JSON and finds quantifiable attributes.
 */
 function extractQuantAttributes(){
+
 
     QUANT_ATTR = {};
 

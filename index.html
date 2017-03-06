@@ -8,7 +8,10 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="css/control_menu.css">
+    <link rel="stylesheet" type="text/css" href="css/buttons.css">
+    <link rel="stylesheet" type="text/css" href="css/toggles.css">
     <link rel="stylesheet" type="text/css" href="css/select.css">
+    <link rel="stylesheet" type="text/css" href="css/information_panel.css">
 </head>
 
 <body>
@@ -18,39 +21,53 @@
         <a href="#show1" class="show" id="show1">-</a>
         <div class="control_panel">
             <form action="">
+
+                <!--    <label class="label">Graph Type:</label>
+                    <div class="fakeit"> Select a graph type:
+                        <ul id="dropdown" style="display:none">
+                            <li><input type="radio" value="scatter"><label>Scatter</label></li>
+							<li><input type="radio" value="network"><label>Network</label></li>
+							<li><input type="radio" value="line"><label>Line</label></li>
+                            <li><input type="radio" value="bar"><label>Bar</label></li>
+
+                        </ul>
+                    </div> -->
+
                 <p>
                     <label class="label">Graph Type:</label>
                     <select class="turnintodropdown" id="graph_select">
-						    <option value="none">Select a graph type:</option>
+                            <option value="none">Select a graph type:</option>
                             <option value="scatter">Scatter</option>
                             <option value="network">Network</option>
                             <option value="line">Line</option>
                             <option value="bar">Bar</option>
-				    	</select>
+
+				    </select>
                 </p>
+
                 <p>
                     <label class="label">Data set:</label>
-                    <select class="turnintodropdown" id="data_set">
+                    <select id="data_set">
                         <option value="none">Select data set:</option>
                     </select>
                 </p>
 
                 <p>
                     <label class="label">Axes:</label>
-                    <select class="turnintodropdown" name="axis" id="x_axis_select"></select>
+                    <select name="axis" id="x_axis_select"></select>
                 </p>
                 <p>
-                    <select class="turnintodropdown" name="axis" id="y_axis_select"></select>
+                    <select name="axis" id="y_axis_select"></select>
                 </p>
                 <p>
-                    <select class="turnintodropdown" name="axis" id="z_axis_select"></select>
+                    <select name="axis" id="z_axis_select"></select>
                 </p>
                 <a class="graph_btn" onclick="drawGraph()">GRAPH!</a>
             </form>
 
-            <form class="control_panel2">
+            <form>
 
-                <div class="toggle">
+                <div class="toggle" id="dimensions">
                     <input type="checkbox" name="toggle" class="toggle-cb" id="2D3D" checked>
                     <label class="toggle-label" for="2D3D">
                         <div class="toggle-inner"></div>
@@ -66,6 +83,11 @@
     </div>
 
 
+    <div class="information_panel"></div>
+
+
+
+
     <!-- JSON -->
     <script type="text/javascript" src="resources/data.json"></script>
     <!-- jQuery libraries -->
@@ -74,18 +96,22 @@
     <!-- three.js and TrackballControls libraries-->
     <script type="text/javascript" src="js/libs/three.js"></script>
     <script type="text/javascript" src="js/libs/TrackballControls.js"></script>
-
     <!-- Main js scripts -->
     <script type="text/javascript" src="js/parse.js"></script>
     <script type="text/javascript" src="js/objectscripts/raycaster.js"></script>
-    <script type="text/javascript" src="js/objectscripts/select.js"></script>
-
+    <script type="text/javascript" src="js/analysis.js"></script>
     <script type="text/javascript" src="js/graph.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
+
+
+
 
     <script type="text/javascript">
 
         extractQuantAttributes();
+
+
+
 
         /**
          * Populates data set select options.
@@ -99,6 +125,40 @@
             }
         }
 
+        $(".information_panel").on('click', function(){
+            if($(".information_panel").css("width")=="10px"){
+                $(".information_panel").css({"right":"10px", "top":"10px", "width":"180px",
+                    "height":"auto" ,"box-shadow":"0px 0px 1px #777", "color":"#777"});
+                $(".information_panel").children().show();
+
+            }
+            else{
+                $(".information_panel").css({"right":"5px", "top":"5px", "width":"10px", "height":"10px",
+                    "box-shadow": "1px 1px 2px #b7b7b7", "color":"rgba(0,0,0,0)"});
+                $(".information_panel").children().hide();
+            }
+
+        });
+
+        /* Experimenting with styling a nice dropdown*/
+        $(".fakeit").on('click', function(){
+            if($("#dropdown").css("display") == "none"){
+                $("#dropdown").css("display","block" );
+                $(".fakeit").css("background", "#f5f5f5 url(resources/images/collapse_arrow.png) 96% center no-repeat");
+            }
+            else{
+                $("#dropdown").css("display","none" );
+                $(".fakeit").css("background", "#ffffff url(resources/images/expand_arrow.png) 96% center no-repeat");
+            }
+        });
+
+        //TODO merge the three
+        /* Removes the "Select a ..." option once another has been selected.*/
+        $(document).on('change', '#graph_select', function() {
+            console.log("GRAPH_SELECT");
+            $('option[value="none"]', this).remove();
+        });
+
         $(document).on('change', '#data_set', function() {
             $('option[value="none"]', this).remove();
             fillAxes($("#data_set").val());
@@ -107,6 +167,7 @@
         $(document).on('change', '[name="axis"]', function() {
             $('option[value="none"]', this).remove();
         });
+
 
         /**
          * Populates the axis select options.

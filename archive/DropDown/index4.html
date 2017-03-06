@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		<meta charset="UTF-8" />
+
+        <title>Custom Drop-Down List Styling</title>
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="js/modernizr.custom.79639.js"></script>
+    </head>
+    <body>
+        <div class="container">
+
+			<section class="main">
+				<div class="wrapper-demo">
+					<div id="graph_select" class="wrapper-dropdown-4">Select a graph type:
+						<ul class="dropdown">
+							<li><input type="radio" value="scatter"><label>Scatter</label></li>
+							<li><input type="radio" value="network"><label>Network</label></li>
+							<li><input type="radio" value="line"><label>Line</label></li>
+						</ul>
+					</div>
+				​</div>
+			</section>
+
+		</div>
+		<!-- jQuery if needed -->
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<script type="text/javascript">
+
+
+			function DropDown(el) {
+				this.dd = el;
+				this.opts = this.dd.find('ul.dropdown > li');
+				this.val = [];
+				this.index = [];
+				this.initEvents();
+			}
+			DropDown.prototype = {
+				initEvents : function() {
+					var obj = this;
+
+					obj.dd.on('click', function(event){
+						$(this).toggleClass('active');
+						event.stopPropagation();
+					});
+
+
+					obj.opts.children('label').on('click',function(event){
+						var opt = $(this).parent(),
+							chbox = opt.children('input'),
+							val = chbox.val(),
+							idx = opt.index();
+
+                            console.log(val);
+
+
+                        $('<li><input type="radio" value="blah"><label>OOGA</label></li>').appendTo('ul');
+
+                    });
+				},
+				getValue : function() {
+					return this.val;
+				},
+				getIndex : function() {
+					return this.index;
+				}
+			}
+
+			$(function() {
+
+				var dd = new DropDown( $('#graph_select') );
+
+				$(document).click(function() {
+					// all dropdowns
+					$('.wrapper-dropdown-4').removeClass('active');
+				});
+
+			});
+
+		</script>
+	</body>
+</html>

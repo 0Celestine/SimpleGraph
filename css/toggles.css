@@ -1,0 +1,93 @@
+
+.toggle {
+    position: relative;
+    width: 86px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.toggle input[type=checkbox] {
+    display: none;
+}
+
+.toggle-label {
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 0px;
+}
+
+.toggle-inner {
+    width: 200%;
+    margin-left: -100%;
+    -webkit-transition: margin 0.3s ease-in 0s;
+    -moz-transition: margin 0.3s ease-in 0s;
+    -ms-transition: margin 0.3s ease-in 0s;
+    -o-transition: margin 0.3s ease-in 0s;
+    transition: margin 0.3s ease-in 0s;
+}
+
+.toggle-inner:before, .toggle-inner:after {
+    float: left;
+    width: 50%;
+    height: 40px;
+    padding: 10px;
+    /*line-height: 40px;*/
+    font-size: 16px;
+    font-weight: 300;
+    color: white;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.toggle-inner:before {
+    content: "2D";
+    padding-left: 10px;
+    background-color: #FFFFFF;
+    color: #777777;
+}
+
+.toggle-inner:after {
+    content: "3D";
+    padding-right: 10px;
+    background-color: #FFFFFF;
+    color: #777777;
+    text-align: right;
+}
+
+.toggle-switch {
+    width: 20px;
+    margin: 10px;
+    background: #FFFFFF;
+    border: 1px solid #ccc;
+    border-radius: 0px;
+    position: absolute;
+    top: 0px;
+    bottom: 0;
+    right: 45px;
+    -webkit-transition: all 0.3s ease-in 0s;
+    -moz-transition: all 0.3s ease-in 0s;
+    -ms-transition: all 0.3s ease-in 0s;
+    -o-transition: all 0.3s ease-in 0s;
+    transition: all 0.3s ease-in 0s;
+}
+
+.toggle:hover .toggle-switch {
+    background: #f5f5f5;
+    /*border: 1px solid #777777;*/
+}
+
+.toggle-cb:checked+.toggle-label .toggle-inner {
+    margin-left: 0;
+}
+
+.toggle-cb:checked+.toggle-label .toggle-switch {
+    right: 0;
+}
+
+#dimensions {
+    top: 41px;
+}
