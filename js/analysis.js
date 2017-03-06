@@ -6,6 +6,7 @@ function getPointData(point_name){
     //console.log(JSON.parse(point_name));
     return JSON.parse(point_name);
 }
+
 /**
 * Given a point's data in dictionary form, displays it in the
 * information panel.
@@ -21,6 +22,16 @@ function displayPointData(point_data){
             $("<label></label>").text(attr_label).appendTo(".information_panel");
             var attr_val = point_data[attribute];
             $('<p class="indent"></p>').text(attr_val).appendTo(".information_panel");
+        }
+        else{
+            var array_label = attribute.toUpperCase().concat(":");
+            $("<label></label>").text(array_label).appendTo(".information_panel");
+            var array_val;
+            for(var i = 0; i < point_data[attribute].length; i++){
+                array_val = point_data[attribute][i];
+                $('<p class="indent"></p>').text(array_val).appendTo(".information_panel");
+            }
+
         }
     }
 
