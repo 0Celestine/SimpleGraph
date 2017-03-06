@@ -60,7 +60,7 @@
                     <select name="axis" id="y_axis_select"></select>
                 </p>
                 <p>
-                    <select name="axis" id="z_axis_select"></select>
+                    <select name="axis" id="z_axis_select" style="display:none"></select>
                 </p>
                 <a class="graph_btn" onclick="drawGraph()">GRAPH!</a>
             </form>
@@ -107,11 +107,8 @@
 
 
     <script type="text/javascript">
-
+        //Set up global data variable
         extractQuantAttributes();
-
-
-
 
         /**
          * Populates data set select options.
@@ -125,20 +122,37 @@
             }
         }
 
+        /**
+        * Styling for the informational panel.
+        */
         $(".information_panel").on('click', function(){
+            $(".information_panel").empty();
             if($(".information_panel").css("width")=="10px"){
                 $(".information_panel").css({"right":"10px", "top":"10px", "width":"180px",
                     "height":"auto" ,"box-shadow":"0px 0px 1px #777", "color":"#777"});
-                $(".information_panel").children().show();
+                //$(".information_panel").children().show();
 
             }
             else{
                 $(".information_panel").css({"right":"5px", "top":"5px", "width":"10px", "height":"10px",
                     "box-shadow": "1px 1px 2px #b7b7b7", "color":"rgba(0,0,0,0)"});
-                $(".information_panel").children().hide();
+                //$(".information_panel").children().hide();
             }
 
         });
+
+        $(".information_panel").hover(
+            function(){
+                if($(".information_panel").css("width")=="10px"){
+                    $(this).css("box-shadow", "0px 0px 2px #b7b7b7 inset");
+                }
+            },
+            function(){
+                if($(".information_panel").css("width")=="10px"){
+                    $(this).css("box-shadow", "1px 1px 2px #b7b7b7");
+                }
+            }
+        );
 
         /* Experimenting with styling a nice dropdown*/
         $(".fakeit").on('click', function(){
@@ -166,6 +180,16 @@
 
         $(document).on('change', '[name="axis"]', function() {
             $('option[value="none"]', this).remove();
+        });
+
+
+        $("#2D3D").on('change',function(){
+            if($('#2D3D').is(":checked")){
+                $("#z_axis_select").hide();
+            }
+            else{
+                $("#z_axis_select").show();
+            }
         });
 
 
@@ -218,9 +242,11 @@
             //Set axes_attr
             GRAPH.axes_attr.push(
                 $("#x_axis_select").val(),
-                $("#y_axis_select").val(),
-                $("#z_axis_select").val()
+                $("#y_axis_select").val()
             );
+            if( GRAPH.is2D == false){
+                GRAPH.axes_attr.push($("#z_axis_select").val());
+            }
             //Set scale_log
 
 
